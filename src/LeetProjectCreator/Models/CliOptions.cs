@@ -6,7 +6,7 @@ namespace LeetProjectCreator.Models
     [PublicAPI]
     public class CliOptions
     {
-        [Option('u', "url", HelpText = "Problem Url. If you want solve specific problem. " +
+        [Option('u', "url", HelpText = "Problem url, if you want solve specific problem. " +
                                        "Example https://leetcode.com/problems/two-sum/",
             Required = false)]
         public string ProblemUrl { get; set; } = string.Empty;

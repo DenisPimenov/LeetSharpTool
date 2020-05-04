@@ -45,14 +45,8 @@ namespace LeetProjectCreator.Common
 
         public T Value { get; }
 
-        public static implicit operator Result<T>(T data)
-        {
-            return new Result<T>(true, data);
-        }
+        public static implicit operator Result<T>(T data) => Ok(data);
 
-        public static implicit operator Result<T>(Error error)
-        {
-            return new Result<T>(false, default!, error);
-        }
+        public static implicit operator Result<T>(Error error) => Fail<T>(error);
     }
 }

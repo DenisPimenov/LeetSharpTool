@@ -6,6 +6,7 @@ using CommandLine;
 using LeetProjectCreator.Common;
 using LeetProjectCreator.Models;
 using static LeetProjectCreator.Common.Result;
+using static LeetProjectCreator.ProgramErrors;
 
 namespace LeetProjectCreator
 {
@@ -16,7 +17,7 @@ namespace LeetProjectCreator
             var result = await Parser.Default.ParseArguments<CliOptions>(args)
                 .MapResult(
                     opt => Run(opt),
-                    _ => Task.FromResult(Fail<string>(Errors.InvalidArgsError)));
+                    _ => Task.FromResult(Fail<string>(InvalidArgsError)));
 
             if (result.Success)
             {
@@ -25,7 +26,7 @@ namespace LeetProjectCreator
                 return 0;
             }
 
-            if (result.Error != Errors.InvalidArgsError)
+            if (result.Error != InvalidArgsError)
             {
                 await Console.Error.WriteLineAsync(result.Error.Message);
             }
@@ -44,7 +45,7 @@ namespace LeetProjectCreator
         {
             return string.IsNullOrWhiteSpace(options.ProblemUrl)
                 ? GetRandomProblem(problems, options.Level)
-                : ParseFromUrl(problems ,options.ProblemUrl);
+                : ParseFromUrl(problems, options.ProblemUrl);
 
             static Result<string> GetRandomProblem(Problem[] allProblems, ProblemLevel? problemLevel)
             {
@@ -62,7 +63,7 @@ namespace LeetProjectCreator
                     }
                 }
 
-                return Errors.ProblemsFetchError();
+                return CannotSelectProblemError;
             }
 
             static Result<string> ParseFromUrl(Problem[] allProblems, string url)
@@ -70,11 +71,15 @@ namespace LeetProjectCreator
                 var name = url.Split("/")
                     .LastOrDefault(s => s.Length != 0);
                 if (string.IsNullOrEmpty(name))
-                    return Errors.ProblemParseError(url);
+                    return ProblemParseError(url);
 
-                var problem = allProblems.FirstOrDefault(p => string.Equals(p.Stat.Name, name));
+                var problem = allProblems.FirstOrDefault(p =>
+                    string.Equals(p.Stat.Name, name, StringComparison.InvariantCulture));
                 if (problem == null)
-                    return Errors.ProblemParseError(url);
+                    return ProblemParseError(url);
+
+                if (Directory.Exists(name))
+                    return ProblemAlreadyExist;
 
                 return name;
             }
@@ -85,15 +90,13 @@ namespace LeetProjectCreator
             var name = problemData.Name;
             var csharpSnippet = problemData.CodeSnippets.FirstOrDefault(s => s.Language == "csharp");
             if (csharpSnippet == null)
-                return Errors.NotSupportedLanguageError();
+                return NotSupportedLanguageError();
 
             DotnetCliApi.CreateProject(testFramework, $"./{name}");
 
-            var problemCsPath = $"./{name}/Problem.cs";
-            var escapedContent = HtmlUtility.RemoveHtmlTags(problemData.Content);
-
-            File.AppendAllText(problemCsPath, $@"/*{escapedContent}*/{Environment.NewLine}");
-            File.AppendAllText(problemCsPath, csharpSnippet.Code);
+            var mdContent = ReadmeHelper.ConvertToMd($"{LeetCodeApi.ProblemsUrl}/{name}",problemData.Content);
+            File.AppendAllText($"./{name}/Readme.md", mdContent);
+            File.AppendAllText($"./{name}/Problem.cs", csharpSnippet.Code);
             return name;
         }
     }

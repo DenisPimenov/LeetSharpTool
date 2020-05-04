@@ -5,6 +5,8 @@ using LeetProjectCreator.Common;
 using LeetProjectCreator.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using static LeetProjectCreator.ProgramErrors;
+
 
 namespace LeetProjectCreator
 {
@@ -12,6 +14,8 @@ namespace LeetProjectCreator
     {
         private const string GraphQlApiUri = "https://leetcode.com/graphql";
         private const string AllProblemsUri = "https://leetcode.com/api/problems/all";
+
+        public const string ProblemsUrl = "https://leetcode.com/problems";
 
         private static readonly HttpClient HttpClient = new HttpClient();
 
@@ -29,14 +33,14 @@ namespace LeetProjectCreator
 
             var response = await HttpClient.PostAsync(GraphQlApiUri, CreateHttpContent(requestData));
             if (!response.IsSuccessStatusCode)
-                return Errors.ProblemFetchError(problemName);
+                return ProblemFetchError(problemName);
 
             var json = await response.Content.ReadAsStringAsync();
             var problem = JObject.Parse(json)
                 .SelectToken("$.data.question")
                 ?.ToObject<ProblemData>();
             if (problem == null)
-                return Errors.ProblemFetchError(problemName);
+                return ProblemFetchError(problemName);
 
             return problem;
         }
@@ -45,14 +49,14 @@ namespace LeetProjectCreator
         {
             var response = await HttpClient.GetAsync(AllProblemsUri);
             if (!response.IsSuccessStatusCode)
-                return Errors.ProblemsFetchError();
+                return ProblemsFetchError;
 
             var json = await response.Content.ReadAsStringAsync();
             var problems = JObject.Parse(json)
                 .SelectToken("$.stat_status_pairs")
                 ?.ToObject<Problem[]>();
             if (problems == null || problems.Length == 0)
-                return Errors.ProblemsFetchError();
+                return ProblemsFetchError;
 
             return problems;
         }
@@ -70,20 +74,11 @@ query questionData($titleSlug: String!)
     {
         questionId
         questionFrontendId
-        boundTopicId    
         title
         titleSlug    
         content    
-        translatedTitle    
-        translatedContent    
         isPaidOnly   
         difficulty    
-        likes
-        dislikes    
-        isLiked    
-        similarQuestions    
-        langToValidPlayground        
-        companyTagStats    
         codeSnippets {
              lang    
              langSlug

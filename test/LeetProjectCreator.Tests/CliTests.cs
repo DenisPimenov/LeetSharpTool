@@ -53,6 +53,18 @@ namespace LeetProjectCreator.Tests
             IsProjectExist(code.Value).Should().BeFalse();
         }
 
+        [Fact]
+        public async Task Should_return_error_if_problem_already_exist()
+        {
+            var prevResult = await Program.Run(new CliOptions {ProblemUrl = "https://leetcode.com/problems/two-sum/"});
+            var result = await Program.Run(new CliOptions {ProblemUrl = "https://leetcode.com/problems/two-sum/"});
+
+            result.Success.Should().BeFalse();
+            result.Error.Should().Be(ProgramErrors.ProblemAlreadyExist);
+
+            RemoveProject(prevResult.Value);
+        }
+
         private static bool IsProjectExist(string path)
         {
             return Directory.Exists(path) && new DirectoryInfo(path).GetFiles().Length > 0;
