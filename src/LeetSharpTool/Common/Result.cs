@@ -6,7 +6,7 @@ namespace LeetSharpTool.Common
     {
         private readonly Error error;
 
-        protected Result(bool success, Error error = default)
+        protected Result(bool success, Error? error = default)
         {
             Success = success;
             this.error = error ?? new Error("", 0);
@@ -38,7 +38,7 @@ namespace LeetSharpTool.Common
 
     public class Result<T> : Result
     {
-        public Result(bool success, T value, Error error = default) : base(success, error)
+        public Result(bool success, T value, Error? error = default) : base(success, error)
         {
             Value = value;
         }
