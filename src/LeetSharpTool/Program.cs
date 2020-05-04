@@ -3,12 +3,12 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using CommandLine;
-using LeetProjectCreator.Common;
-using LeetProjectCreator.Models;
-using static LeetProjectCreator.Common.Result;
-using static LeetProjectCreator.ProgramErrors;
+using LeetSharpTool.Common;
+using LeetSharpTool.Models;
+using static LeetSharpTool.Common.Result;
+using static LeetSharpTool.ProgramErrors;
 
-namespace LeetProjectCreator
+namespace LeetSharpTool
 {
     public static class Program
     {

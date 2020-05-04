@@ -1,6 +1,6 @@
-using LeetProjectCreator.Common;
+using LeetSharpTool.Common;
 
-namespace LeetProjectCreator
+namespace LeetSharpTool
 {
     public static class ProgramErrors
     {

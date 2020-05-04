@@ -1,10 +1,10 @@
 using System.IO;
 using System.Threading.Tasks;
 using FluentAssertions;
-using LeetProjectCreator.Models;
+using LeetSharpTool.Models;
 using Xunit;
 
-namespace LeetProjectCreator.Tests
+namespace LeetSharpTool.Tests
 {
     public class CliTests
     {

@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\LeetProjectCreator\LeetProjectCreator.csproj" />
+    <ProjectReference Include="..\..\src\LeetSharpTool\LeetSharpTool.csproj" />
   </ItemGroup>
 
 </Project>

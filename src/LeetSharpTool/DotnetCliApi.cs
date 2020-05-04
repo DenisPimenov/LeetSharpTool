@@ -1,7 +1,7 @@
 using System;
 using System.Diagnostics;
 
-namespace LeetProjectCreator
+namespace LeetSharpTool
 {
     public static class DotnetCliApi
     {

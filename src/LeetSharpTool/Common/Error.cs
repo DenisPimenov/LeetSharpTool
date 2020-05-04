@@ -1,4 +1,4 @@
-namespace LeetProjectCreator.Common
+namespace LeetSharpTool.Common
 {
     public class Error
     {

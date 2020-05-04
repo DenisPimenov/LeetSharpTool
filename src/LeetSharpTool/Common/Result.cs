@@ -1,6 +1,6 @@
 using System;
 
-namespace LeetProjectCreator.Common
+namespace LeetSharpTool.Common
 {
     public class Result
     {

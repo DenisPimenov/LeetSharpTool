@@ -1,7 +1,7 @@
 using System.Text;
 using Html2Markdown;
 
-namespace LeetProjectCreator
+namespace LeetSharpTool
 {
     internal static class ReadmeHelper
     {

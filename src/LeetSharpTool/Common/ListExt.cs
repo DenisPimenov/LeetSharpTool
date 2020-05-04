@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace LeetProjectCreator.Common
+namespace LeetSharpTool.Common
 {
     public static class ListExt
     {

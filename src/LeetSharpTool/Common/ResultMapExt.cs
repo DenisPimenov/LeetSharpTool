@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace LeetProjectCreator.Common
+namespace LeetSharpTool.Common
 {
     public static class ResultMapExt
     {

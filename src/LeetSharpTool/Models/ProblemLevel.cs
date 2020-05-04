@@ -1,4 +1,4 @@
-namespace LeetProjectCreator.Models
+namespace LeetSharpTool.Models
 {
     public enum ProblemLevel
     {

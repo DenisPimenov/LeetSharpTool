@@ -1,14 +1,14 @@
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using LeetProjectCreator.Common;
-using LeetProjectCreator.Models;
+using LeetSharpTool.Common;
+using LeetSharpTool.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using static LeetProjectCreator.ProgramErrors;
+using static LeetSharpTool.ProgramErrors;
 
 
-namespace LeetProjectCreator
+namespace LeetSharpTool
 {
     public static class LeetCodeApi
     {

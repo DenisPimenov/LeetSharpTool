@@ -1,7 +1,7 @@
 using CommandLine;
 using JetBrains.Annotations;
 
-namespace LeetProjectCreator.Models
+namespace LeetSharpTool.Models
 {
     [PublicAPI]
     public class CliOptions

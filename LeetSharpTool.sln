@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeetProjectCreator", "src\LeetProjectCreator\LeetProjectCreator.csproj", "{1A1BE3A0-2E07-474A-8F5E-AD7834041D3C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeetSharpTool", "src\LeetSharpTool\LeetSharpTool.csproj", "{1A1BE3A0-2E07-474A-8F5E-AD7834041D3C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeetProjectCreator.Tests", "test\LeetProjectCreator.Tests\LeetProjectCreator.Tests.csproj", "{28504BFE-222D-4855-9F31-F87F6F3DA915}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeetSharpTool.Tests", "test\LeetSharpTool.Tests\LeetSharpTool.Tests.csproj", "{28504BFE-222D-4855-9F31-F87F6F3DA915}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

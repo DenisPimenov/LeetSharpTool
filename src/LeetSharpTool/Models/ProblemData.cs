@@ -3,7 +3,7 @@
 using JetBrains.Annotations;
 using Newtonsoft.Json;
 
-namespace LeetProjectCreator.Models
+namespace LeetSharpTool.Models
 {
     [UsedImplicitly]
     public class ProblemData
